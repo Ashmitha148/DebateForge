@@ -165,46 +165,32 @@ Infrastructure: Vercel (frontend), Render (backend), GitHub
 
 ## Project Structure
 
+```
 debateforge/
-
 ├── backend/
-
-│ ├── main.py
-
-│ ├── requirements.txt
-
-│ └── .env # not committed
-
+│   ├── main.py
+│   ├── requirements.txt
+│   └── .env              # not committed
 ├── frontend/
-
-│ ├── .env # not committed
-
-│ └── src/
-
-│ ├── App.jsx
-
-│ ├── App.css
-
-│ ├── api/
-
-│ │ └── debate.js
-
-│ ├── utils/
-
-│ │ ├── history.js
-
-│ │ └── estimateStrength.js
-
-│ └── components/
-
-│ ├── Landing.jsx
-
-│ ├── Arena.jsx
-
-│ └── Report.jsx
-
-## └── screenshots/
-
+│   ├── .env              # not committed
+│   └── src/
+│       ├── App.jsx
+│       ├── App.css
+│       ├── api/
+│       │   └── debate.js
+│       ├── utils/
+│       │   ├── history.js
+│       │   └── estimateStrength.js
+│       └── components/
+│           ├── Landing.jsx
+│           ├── Arena.jsx
+│           └── Report.jsx
+├── screenshots/
+│   ├── landing.png
+│   ├── arena.png
+│   └── report.png
+└── README.md
+```
 ## Running Locally
 
 ### Backend
