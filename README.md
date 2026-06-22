@@ -80,44 +80,24 @@ Easy, Medium, Hard — each shifts the AI's aggression level and tone through
 the system prompt. Hard mode shows no mercy.
 
 ## Architecture
-User (Browser)
 
-|
+The frontend is a React 18 + Vite app deployed on Vercel. It talks to a 
+FastAPI backend running on Render over a simple REST API.
 
-v
-
-React Frontend  →  Vercel CDN
-
-|
-
-| REST API (JSON)
-
-v
-
-FastAPI Backend  →  Render
-
-|
-
-v
-
-Groq API  (Llama 3.3 70B)
-
-|
-
-v
-
-Structured JSON response
+Every debate round, the frontend sends the full conversation history 
+(not just the latest message) along with the user's new argument to the 
+backend. The backend forwards this to Groq's Llama 3.3 70B model with 
+a structured prompt that forces a JSON response:
 
 { argument, fallacy, counterquestion, strength_score }
 
-|
+The AI's counterargument, any detected logical fallacy, a follow-up 
+challenge question, and a strength score for the user's argument all 
+come back in that single response. No separate API calls per field.
 
-|-- Scoring engine
-
-|-- PDF generator (ReportLab)
-
-`-- localStorage history
----
+Debate history is stored in localStorage — no database needed. PDF 
+export is generated server-side using ReportLab and streamed directly 
+to the browser as a binary download.
 
 ## API Reference
 
