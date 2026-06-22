@@ -219,7 +219,7 @@ pip install -r requirements.txt
 ```
 
 Create `backend/.env`:
-GROQ_API_KEY=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
+GROQ_API_KEY=your_groq_api_key_here
 Free Groq API key at [console.groq.com](https://console.groq.com)
 
 ```bash
