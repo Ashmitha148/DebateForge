@@ -23,9 +23,9 @@ Most AI tools are built to agree with you. DebateForge does the opposite. Submit
 
 ## Why I built this
 
-Critical thinking erodes when everything around you is designed to validate what you already believe. I wanted to build the opposite of a chatbot that agrees with you — something that genuinely stress-tests your reasoning the way a sharp debate opponent would.
+Critical thinking gets weaker when everything around you is designed to validate what you already believe. I wanted to build the opposite of a chatbot that agrees with you — something that actively stress-tests your reasoning the way a sharp debate opponent would.
 
-The hardest engineering problem wasn't the AI integration. It was getting the model to be consistently adversarial without becoming incoherent, designing a structured JSON contract that reliably extracts fallacy data across wildly different topics, and building a scoring system that produces meaningful per-round feedback.
+The hardest engineering problem wasn't integrating the model itself. It was making the AI stay consistently adversarial without becoming repetitive or incoherent, designing a structured JSON contract that could reliably extract fallacy data across different topics, and building a scoring system that produces meaningful feedback round by round.
 
 ---
 
@@ -48,40 +48,45 @@ The hardest engineering problem wasn't the AI integration. It was getting the mo
 ## Features
 
 **Adversarial debate engine**
-The AI takes the opposite position on any topic and maintains it for 5 full rounds. It does not soften, agree, or congratulate — it pushes back every time.
+The AI takes the hardest possible counter-position on any topic and holds it 
+for 5 full rounds. Instead of validating the user's view, it continuously challenges assumptions and pushes the argument forward.
 
 **Logical fallacy detection**
-After each user argument, the AI identifies any logical fallacy committed — hasty generalization, false dilemma, appeal to authority, straw man, and others — with a plain-English explanation shown inline.
+After each argument, the AI identifies flaws such as — hasty generalization, 
+false dilemma, straw man, appeal to authority — then explains why the argument weakened instead of simply labeling the mistake.
 
 **Argument strength scoring**
-Every round, the AI scores the user's argument from 1 to 10 based on evidence, reasoning quality, and clarity. Scores aggregate into a final verdict out of 100.
+Every round gets a score from 1 to 10 based on evidence, reasoning quality, 
+and clarity. Scores combine into a final verdict out of 100 after 5 rounds.
 
 **Live strength meter**
-A client-side heuristic estimates argument strength while the user types — before sending. Built with keyword detection and length analysis. Zero API calls, instant feedback.
+A client-side heuristic estimates your argument strength while you type — 
+before you even send it. No API calls, no latency. Just instant feedback.
 
-**Final verdict report**
-After 5 rounds: overall score, round-by-round strength chart, full list of fallacies caught, and a one-line verdict.
+**Final scorecard**
+After round 5: your overall score, a round-by-round breakdown, every fallacy 
+caught, and a one-line verdict on how you performed.
 
 **PDF export**
-Server-side PDF generation using ReportLab. Exports a formatted scorecard with round scores and full debate transcript.
+Download a formatted scorecard with your round scores and full debate 
+transcript. Generated server-side, streamed back as a binary download.
 
 **Debate history**
-Past debates are saved to localStorage and can be reopened to review the full transcript and scores.
+Every debate is saved locally. Come back later, reopen any past fight, 
+review the full transcript and scores.
 
 **Difficulty modes**
-Easy, Medium, and Hard — each changes the AI's aggression level and tone through the system prompt.
-
----
+Easy, Medium, Hard — each shifts the AI's aggression level and tone through 
+the system prompt. Hard mode shows no mercy.
 
 ## Architecture
-
 User (Browser)
 
 |
 
 v
 
-React Frontend → Vercel CDN
+React Frontend  →  Vercel CDN
 
 |
 
@@ -89,13 +94,13 @@ React Frontend → Vercel CDN
 
 v
 
-FastAPI Backend → Render
+FastAPI Backend  →  Render
 
 |
 
 v
 
-Groq API (Llama 3.3 70B)
+Groq API  (Llama 3.3 70B)
 
 |
 
@@ -111,7 +116,8 @@ Structured JSON response
 
 |-- PDF generator (ReportLab)
 
-## `-- localStorage history
+`-- localStorage history
+---
 
 ## API Reference
 
@@ -146,19 +152,6 @@ Response: `application/pdf` — triggers browser download
 
 ---
 
-## Performance
-
-Frontend loads instantly from Vercel's global CDN.
-
-Backend cold start is 30–50 seconds on the free Render tier due to spin-down after inactivity. Subsequent requests respond normally.
-
-The live argument strength meter runs entirely client-side with no API calls, so feedback is instant while typing.
-
-Debate history uses localStorage — no database, no network request, no latency.
-
-Full conversation history is passed to the LLM on every round, giving the model genuine multi-turn memory without a separate memory layer.
-
----
 
 ## Tech Stack
 
