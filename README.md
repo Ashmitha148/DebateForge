@@ -32,12 +32,15 @@ The hardest engineering problem wasn't the AI integration. It was getting the mo
 ## Screenshots
 
 ### Landing Page
+
 ![Landing](debateforge/screenshots/landing.png)
 
 ### Debate Arena
+
 ![Arena](debateforge/screenshots/arena.png)
 
 ### Final Report
+
 ![Report](debateforge/screenshots/report.png)
 
 ---
@@ -71,13 +74,14 @@ Easy, Medium, and Hard — each changes the AI's aggression level and tone throu
 ---
 
 ## Architecture
+
 User (Browser)
 
 |
 
 v
 
-React Frontend  →  Vercel CDN
+React Frontend → Vercel CDN
 
 |
 
@@ -85,13 +89,13 @@ React Frontend  →  Vercel CDN
 
 v
 
-FastAPI Backend  →  Render
+FastAPI Backend → Render
 
 |
 
 v
 
-Groq API  (Llama 3.3 70B)
+Groq API (Llama 3.3 70B)
 
 |
 
@@ -107,8 +111,7 @@ Structured JSON response
 
 |-- PDF generator (ReportLab)
 
-`-- localStorage history
----
+## `-- localStorage history
 
 ## API Reference
 
@@ -117,6 +120,7 @@ Structured JSON response
 Accepts the user's argument and the full conversation history. Returns an adversarial AI response.
 
 Request:
+
 ```json
 {
   "topic": "AI will replace most jobs",
@@ -125,6 +129,7 @@ Request:
 ```
 
 Response:
+
 ```json
 {
   "reply": "{\"argument\": \"Productivity gains don't equal job replacement...\", \"fallacy\": {\"name\": \"Hasty Generalization\", \"explanation\": \"One study doesn't prove a universal trend\"}, \"counterquestion\": \"Which jobs specifically have been eliminated rather than changed?\", \"strength_score\": 6}"
@@ -166,46 +171,46 @@ Infrastructure: Vercel (frontend), Render (backend), GitHub
 ---
 
 ## Project Structure
+
 debateforge/
 
 ├── backend/
 
-│   ├── main.py
+│ ├── main.py
 
-│   ├── requirements.txt
+│ ├── requirements.txt
 
-│   └── .env                 # not committed
+│ └── .env # not committed
 
 ├── frontend/
 
-│   ├── .env                 # not committed
+│ ├── .env # not committed
 
-│   └── src/
+│ └── src/
 
-│       ├── App.jsx
+│ ├── App.jsx
 
-│       ├── App.css
+│ ├── App.css
 
-│       ├── api/
+│ ├── api/
 
-│       │   └── debate.js
+│ │ └── debate.js
 
-│       ├── utils/
+│ ├── utils/
 
-│       │   ├── history.js
+│ │ ├── history.js
 
-│       │   └── estimateStrength.js
+│ │ └── estimateStrength.js
 
-│       └── components/
+│ └── components/
 
-│           ├── Landing.jsx
+│ ├── Landing.jsx
 
-│           ├── Arena.jsx
+│ ├── Arena.jsx
 
-│           └── Report.jsx
+│ └── Report.jsx
 
-└── screenshots/
----
+## └── screenshots/
 
 ## Running Locally
 
@@ -219,7 +224,7 @@ pip install -r requirements.txt
 ```
 
 Create `backend/.env`:
-GROQ_API_KEY=your_groq_api_key_here
+GROQ_API_KEY=your_key_here
 Free Groq API key at [console.groq.com](https://console.groq.com)
 
 ```bash
@@ -235,6 +240,7 @@ npm install
 
 Create `frontend/.env`:
 VITE_API=http://localhost:8000
+
 ```bash
 npm run dev
 ```
